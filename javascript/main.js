@@ -137,6 +137,7 @@ function generateReport() {
     list.forEach((item) => {
       if (item.quantity && Number(item.quantity) > 0) {
         tableData.push([
+          code,
           sector.name,
           item.code,
           item.name,
@@ -167,7 +168,16 @@ function generateReport() {
 
   doc.autoTable({
     startY: y,
-    head: [["Setor", "Código Item", "Item", "Unidade", "Quantidade Removida"]],
+    head: [
+      [
+        "Código Setor",
+        "Setor",
+        "Código Item",
+        "Item",
+        "Unidade",
+        "Quantidade Removida",
+      ],
+    ],
     body: tableData,
     theme: "grid",
     styles: { fontSize: 8 },
@@ -177,7 +187,7 @@ function generateReport() {
   doc.save(`relatorio_requisicoes_${date.replace(/\//g, "-")}.pdf`);
 
   // Gerar CSV
-  let csvContent = "Setor;Código;Nome;Unidade;Quantidade";
+  let csvContent = "Código Setor;Setor;Código;Nome;Unidade;Quantidade";
   sectorCodes.forEach((code) => {
     const tbody = document.getElementById(`table-body-${code}`);
     const sector = sectors.find((s) => s.code === code);
@@ -194,7 +204,7 @@ function generateReport() {
             : "0";
 
         if (quantidade !== "0") {
-          csvContent += `\n${sector.name};${codigo};${nome};${unidade};${quantidade}`;
+          csvContent += `\n${code};${sector.name};${codigo};${nome};${unidade};${quantidade}`;
         }
       });
     }
