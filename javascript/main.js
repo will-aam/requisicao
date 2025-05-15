@@ -127,15 +127,22 @@ function setupAutocomplete(sector) {
 // Gerar relatório em PDF e CSV
 function generateReport() {
   const date = new Date().toLocaleDateString("pt-BR");
+  const sectorCodes = ["44", "58", "56", "53", "55", "54", "52", "51"];
+  const tableData = [];
 
   // Coleta de dados para PDF
-  const tableData = [];
-  const sectorCodes = ["44", "58", "56", "53", "55", "54", "52", "51"];
   sectorCodes.forEach((code) => {
     const list = loadList(code);
+    const sector = sectors.find((s) => s.code === code);
     list.forEach((item) => {
       if (item.quantity && Number(item.quantity) > 0) {
-        tableData.push([item.code, item.name, item.unit, item.quantity]);
+        tableData.push([
+          sector.name,
+          item.code,
+          item.name,
+          item.unit,
+          item.quantity,
+        ]);
       }
     });
   });
@@ -160,7 +167,7 @@ function generateReport() {
 
   doc.autoTable({
     startY: y,
-    head: [["Código Item", "Item", "Unidade", "Quantidade Removida"]],
+    head: [["Setor", "Código Item", "Item", "Unidade", "Quantidade Removida"]],
     body: tableData,
     theme: "grid",
     styles: { fontSize: 8 },
@@ -170,9 +177,10 @@ function generateReport() {
   doc.save(`relatorio_requisicoes_${date.replace(/\//g, "-")}.pdf`);
 
   // Gerar CSV
-  let csvContent = "Código;Nome;Unidade;Quantidade";
+  let csvContent = "Setor;Código;Nome;Unidade;Quantidade";
   sectorCodes.forEach((code) => {
     const tbody = document.getElementById(`table-body-${code}`);
+    const sector = sectors.find((s) => s.code === code);
     if (tbody) {
       const rows = tbody.querySelectorAll("tr");
       rows.forEach((row) => {
@@ -186,7 +194,7 @@ function generateReport() {
             : "0";
 
         if (quantidade !== "0") {
-          csvContent += `\n${codigo};${nome};${unidade};${quantidade}`;
+          csvContent += `\n${sector.name};${codigo};${nome};${unidade};${quantidade}`;
         }
       });
     }
