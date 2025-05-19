@@ -1,125 +1,286 @@
 /* Estilos base */
-.tab-content {
-  display: none;
+body {
+  font-family: "Inter", sans-serif; /* Fonte moderna e legível */
+  font-size: 16px;
+  line-height: 1.6;
+  background-color: #f4f7fa; /* Fundo mais claro e suave */
+  color: #333; /* Texto escuro para contraste */
 }
-.tab-content.active {
-  display: block;
+
+.container {
+  max-width: 1200px; /* Limite para telas grandes */
+  padding: 1.5rem;
+  margin: 0 auto;
 }
-.autocomplete-suggestions {
-  position: absolute;
-  background: white;
-  border: 1px solid #ddd;
-  max-height: 150px;
-  overflow-y: auto;
-  width: 100%;
-  z-index: 10;
+
+/* Títulos */
+h1 {
+  font-size: clamp(1.8rem, 6vw, 2.2rem); /* Título maior e mais fluido */
+  font-weight: 700;
+  color: #1f2937; /* Cinza escuro elegante */
+  text-align: center;
+  margin-bottom: 1.5rem;
 }
-.autocomplete-suggestions div {
-  padding: 8px;
-  cursor: pointer;
-}
-.autocomplete-suggestions div:hover {
-  background-color: #f0f0f0;
+
+h2 {
+  font-size: clamp(1.4rem, 5vw, 1.8rem);
+  font-weight: 600;
+  color: #374151; /* Tom mais suave */
+  margin-bottom: 1rem;
 }
 
 /* Navegação de setores */
 .sector-nav {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-bottom: 1.5rem;
 }
+
 .current-sector {
-  min-width: 150px;
+  min-width: 160px;
+  padding: 0.75rem 1rem;
+  background-color: #3b82f6; /* Azul vibrante */
+  color: white;
+  border-radius: 8px;
+  font-weight: 500;
   text-align: center;
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Transições suaves */
 }
+
+.current-sector:hover {
+  background-color: #2563eb; /* Tom mais escuro no hover */
+  transform: translateY(-2px); /* Efeito de elevação */
+}
+
 .prev-sector,
 .next-sector {
-  font-size: 1.2rem;
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
+  background-color: #e5e7eb; /* Cinza claro */
+  color: #4b5563;
+  border-radius: 50%; /* Botões circulares */
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 1.25rem;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-/* Estilos responsivos */
-.container {
-  max-width: 100%;
-  padding: 1rem;
+.prev-sector:hover,
+.next-sector:hover {
+  background-color: #d1d5db; /* Cinza mais escuro no hover */
+  transform: scale(1.05); /* Leve aumento */
 }
+
+/* Botões principais */
+button#generate-report,
+button#clear-quantities {
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 500;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button#generate-report {
+  background-color: #10b981; /* Verde esmeralda */
+}
+
+button#generate-report:hover {
+  background-color: #059669;
+  transform: translateY(-2px);
+}
+
+button#clear-quantities {
+  background-color: #ef4444; /* Vermelho vibrante */
+}
+
+button#clear-quantities:hover {
+  background-color: #dc2626;
+  transform: translateY(-2px);
+}
+
+/* Abas */
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+  background-color: white; /* Fundo branco para destaque */
+  padding: 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Sombra sutil */
+}
+
+/* Campo de busca */
+input[type="text"] {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #d1d5db; /* Borda cinza clara */
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  border-color: #3b82f6; /* Azul no foco */
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1); /* Halo suave */
+}
+
+/* Sugestões de autocomplete */
+.autocomplete-suggestions {
+  position: absolute;
+  background: white;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  max-height: 200px;
+  overflow-y: auto;
+  width: 100%;
+  z-index: 10;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.autocomplete-suggestions div {
+  padding: 0.75rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.autocomplete-suggestions div:hover {
+  background-color: #f3f4f6; /* Cinza claro no hover */
+}
+
+/* Tabela */
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  background-color: white;
+  border-radius: 8px;
+  overflow: hidden; /* Bordas arredondadas */
+}
+
+th,
+td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+th {
+  background-color: #f9fafb; /* Cabeçalho claro */
+  font-weight: 600;
+  color: #374151;
+}
+
+td {
+  color: #4b5563;
+}
+
+/* Estilização responsiva */
 
 /* Tablets (768px - 1024px) */
 @media (max-width: 1024px) {
+  .container {
+    padding: 1rem;
+  }
+
   .sector-nav {
-    gap: 0.3rem;
+    gap: 0.5rem;
   }
+
   .current-sector {
-    min-width: 120px;
-    font-size: 0.9rem;
-    padding: 0.5rem;
+    min-width: 140px;
+    font-size: 0.95rem;
+    padding: 0.6rem 0.8rem;
   }
+
   .prev-sector,
   .next-sector {
-    width: 35px;
-    height: 35px;
-    font-size: 1rem;
+    width: 40px;
+    height: 40px;
+    font-size: 1.1rem;
   }
+
+  h1 {
+    font-size: clamp(1.6rem, 5vw, 2rem);
+  }
+
+  h2 {
+    font-size: clamp(1.3rem, 4vw, 1.6rem);
+  }
+
   table {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
   }
+
   th,
   td {
-    padding: 0.5rem;
+    padding: 0.6rem;
   }
+
   input[type="text"] {
-    font-size: 0.9rem;
-    padding: 0.5rem;
+    font-size: 0.95rem;
+    padding: 0.6rem;
   }
+
   .autocomplete-suggestions {
-    max-height: 120px;
+    max-height: 160px;
+  }
+
+  button#generate-report,
+  button#clear-quantities {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.95rem;
   }
 }
 
 /* Celulares (até 767px) */
 @media (max-width: 767px) {
-  .current-sector {
-    min-width: 100px;
-    font-size: 0.8rem;
-    padding: 0.4rem;
+  .container {
+    padding: 0.75rem;
   }
+
+  .current-sector {
+    min-width: 120px;
+    font-size: 0.9rem;
+    padding: 0.5rem;
+  }
+
   .prev-sector,
   .next-sector {
-    width: 30px;
-    height: 30px;
-    font-size: 0.9rem;
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
   }
+
   table {
-    font-size: 0.8rem;
+    font-size: 0.9rem;
     display: block;
     overflow-x: auto;
     white-space: nowrap;
   }
+
   th,
   td {
-    padding: 0.4rem;
+    padding: 0.5rem;
   }
-  input[type="text"] {
-    font-size: 0.8rem;
-    padding: 0.4rem;
-  }
-  .autocomplete-suggestions {
-    max-height: 100px;
-  }
-}
 
-/* Ajustes gerais */
-body {
-  font-size: 16px;
-  line-height: 1.5;
-}
-h1 {
-  font-size: clamp(1.5rem, 5vw, 1.8rem);
-}
-h2 {
-  font-size: clamp(1.2rem, 4vw, 1.5rem);
+  input[type="text"] {
+    font-size: 0.9rem;
+    padding: 0.5rem;
+  }
+
+  .autocomplete-suggestions {
+    max-height: 140px;
+  }
+
+  button#generate-report,
+  button#clear-quantities {
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+  }
 }
