@@ -8,11 +8,15 @@
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles/index.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles/index.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.13/jspdf.plugin.autotable.min.js"></script>
   </head>
@@ -25,12 +29,14 @@
         <button
           id="generate-report"
           class="px-4 py-2 bg-green-500 text-white rounded"
+          data-tooltip="Gerar PDF"
         >
           Baixar Relatório
         </button>
         <button
           id="clear-quantities"
           class="px-4 py-2 bg-red-500 text-white rounded"
+          data-tooltip="Limpar dados"
         >
           Limpar
         </button>

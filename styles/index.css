@@ -1,23 +1,64 @@
 /* Estilos base */
+:root {
+  --primary: #3b82f6;
+  --primary-dark: #2563eb;
+  --secondary: #10b981;
+  --danger: #ef4444;
+  --bg-light: #f4f7fa;
+  --bg-dark: #1f2937;
+  --text-light: #1a1a1a; /* Cor mais escura para títulos */
+  --text-dark: #e5e7eb;
+}
+
 body {
-  font-family: "Inter", sans-serif; /* Fonte moderna e legível */
+  font-family: "Inter", sans-serif;
   font-size: 16px;
   line-height: 1.6;
-  background-color: #f4f7fa; /* Fundo mais claro e suave */
-  color: #333; /* Texto escuro para contraste */
+  background-color: var(--bg-light);
+  color: var(--text-light);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Tema escuro */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: var(--bg-dark);
+    color: var(--text-dark);
+  }
+  .tab-content.active,
+  table {
+    background-color: #374151;
+  }
+  th {
+    background-color: #4b5563;
+  }
+  input[type="text"] {
+    background-color: #4b5563;
+    border-color: #6b7280;
+    color: var(--text-dark);
+  }
+  .autocomplete-suggestions {
+    background-color: #374151;
+    border-color: #6b7280;
+  }
+  .autocomplete-suggestions div:hover {
+    background-color: #4b5563;
+  }
 }
 
 .container {
-  max-width: 1200px; /* Limite para telas grandes */
+  max-width: 1200px;
   padding: 1.5rem;
   margin: 0 auto;
+  display: grid;
+  gap: 1.5rem;
 }
 
 /* Títulos */
 h1 {
-  font-size: clamp(1.8rem, 6vw, 2.2rem); /* Título maior e mais fluido */
+  font-size: clamp(1.8rem, 6vw, 2.2rem);
   font-weight: 700;
-  color: #1f2937; /* Cinza escuro elegante */
+  color: var(--text-light);
   text-align: center;
   margin-bottom: 1.5rem;
 }
@@ -25,8 +66,12 @@ h1 {
 h2 {
   font-size: clamp(1.4rem, 5vw, 1.8rem);
   font-weight: 600;
-  color: #374151; /* Tom mais suave */
+  color: var(--text-light);
   margin-bottom: 1rem;
+}
+
+.tab-content p {
+  color: var(--text-light); /* Cor mais escura para data */
 }
 
 /* Navegação de setores */
@@ -41,26 +86,34 @@ h2 {
 .current-sector {
   min-width: 160px;
   padding: 0.75rem 1rem;
-  background-color: #3b82f6; /* Azul vibrante */
+  background: linear-gradient(45deg, var(--primary), #60a5fa);
   color: white;
   border-radius: 8px;
   font-weight: 500;
   text-align: center;
-  transition: background-color 0.3s ease, transform 0.2s ease; /* Transições suaves */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
 }
 
 .current-sector:hover {
-  background-color: #2563eb; /* Tom mais escuro no hover */
-  transform: translateY(-2px); /* Efeito de elevação */
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.current-sector::after {
+  content: "\f0c9";
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  margin-left: 0.5rem;
 }
 
 .prev-sector,
 .next-sector {
   width: 48px;
   height: 48px;
-  background-color: #e5e7eb; /* Cinza claro */
+  background-color: #e5e7eb;
   color: #4b5563;
-  border-radius: 50%; /* Botões circulares */
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -70,8 +123,20 @@ h2 {
 
 .prev-sector:hover,
 .next-sector:hover {
-  background-color: #d1d5db; /* Cinza mais escuro no hover */
-  transform: scale(1.05); /* Leve aumento */
+  background-color: #000000;
+  transform: scale(1.05);
+}
+
+@media (prefers-color-scheme: dark) {
+  .prev-sector,
+  .next-sector {
+    background-color: #4b5563;
+    color: var(--text-dark);
+  }
+  .prev-sector:hover,
+  .next-sector:hover {
+    background-color: #6b7280;
+  }
 }
 
 /* Botões principais */
@@ -80,45 +145,107 @@ button#clear-quantities {
   padding: 0.75rem 1.5rem;
   border-radius: 8px;
   font-weight: 500;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  color: white;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 button#generate-report {
-  background-color: #10b981; /* Verde esmeralda */
+  background: linear-gradient(45deg, var(--secondary), #34d399);
 }
 
 button#generate-report:hover {
-  background-color: #059669;
   transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+button#generate-report::before {
+  content: "\f019";
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
 }
 
 button#clear-quantities {
-  background-color: #ef4444; /* Vermelho vibrante */
+  background: linear-gradient(45deg, var(--danger), #f87171);
 }
 
 button#clear-quantities:hover {
-  background-color: #dc2626;
   transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* Abas */
+button#clear-quantities::before {
+  content: "\f2ed";
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+}
+
+/* Tooltips */
+button#generate-report::after,
+button#clear-quantities::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #1f2937;
+  color: white;
+  padding: 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+button#generate-report:hover::after,
+button#clear-quantities:hover::after {
+  opacity: 1;
+}
+
+/* Spinner de carregamento */
+#loading-spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+/* Abas com animação */
 .tab-content {
   display: none;
+  animation: fadeIn 0.5s ease-in-out;
 }
 
 .tab-content.active {
   display: block;
-  background-color: white; /* Fundo branco para destaque */
+  background-color: white;
   padding: 1.5rem;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Sombra sutil */
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Campo de busca */
 input[type="text"] {
   width: 100%;
   padding: 0.75rem;
-  border: 1px solid #d1d5db; /* Borda cinza clara */
+  border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   font-size: 1rem;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
@@ -126,15 +253,15 @@ input[type="text"] {
 
 input[type="text"]:focus {
   outline: none;
-  border-color: #3b82f6; /* Azul no foco */
-  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1); /* Halo suave */
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
 /* Sugestões de autocomplete */
 .autocomplete-suggestions {
   position: absolute;
   background: white;
-  border: 1px solid #d1d5db;
+  border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 8px;
   max-height: 200px;
   overflow-y: auto;
@@ -150,7 +277,7 @@ input[type="text"]:focus {
 }
 
 .autocomplete-suggestions div:hover {
-  background-color: #f3f4f6; /* Cinza claro no hover */
+  background-color: #f3f4f6;
 }
 
 /* Tabela */
@@ -160,24 +287,32 @@ table {
   border-spacing: 0;
   background-color: white;
   border-radius: 8px;
-  overflow: hidden; /* Bordas arredondadas */
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  overflow: hidden;
 }
 
 th,
 td {
   padding: 0.75rem;
   text-align: left;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 th {
-  background-color: #f9fafb; /* Cabeçalho claro */
+  background-color: #f9fafb;
   font-weight: 600;
-  color: #374151;
+  color: var(--text-light);
 }
 
 td {
-  color: #4b5563;
+  color: var(--text-light);
+}
+
+td button::before {
+  content: "\f2ed";
+  font-family: "Font Awesome 6 Free";
+  font-weight: 900;
+  margin-right: 0.5rem;
 }
 
 /* Estilização responsiva */
@@ -187,50 +322,40 @@ td {
   .container {
     padding: 1rem;
   }
-
   .sector-nav {
     gap: 0.5rem;
   }
-
   .current-sector {
     min-width: 140px;
     font-size: 0.95rem;
     padding: 0.6rem 0.8rem;
   }
-
   .prev-sector,
   .next-sector {
     width: 40px;
     height: 40px;
     font-size: 1.1rem;
   }
-
   h1 {
     font-size: clamp(1.6rem, 5vw, 2rem);
   }
-
   h2 {
     font-size: clamp(1.3rem, 4vw, 1.6rem);
   }
-
   table {
     font-size: 0.95rem;
   }
-
   th,
   td {
     padding: 0.6rem;
   }
-
   input[type="text"] {
     font-size: 0.95rem;
     padding: 0.6rem;
   }
-
   .autocomplete-suggestions {
     max-height: 160px;
   }
-
   button#generate-report,
   button#clear-quantities {
     padding: 0.6rem 1.2rem;
@@ -243,41 +368,34 @@ td {
   .container {
     padding: 0.75rem;
   }
-
   .current-sector {
     min-width: 120px;
     font-size: 0.9rem;
     padding: 0.5rem;
   }
-
   .prev-sector,
   .next-sector {
     width: 36px;
     height: 36px;
     font-size: 1rem;
   }
-
   table {
     font-size: 0.9rem;
     display: block;
     overflow-x: auto;
     white-space: nowrap;
   }
-
   th,
   td {
     padding: 0.5rem;
   }
-
   input[type="text"] {
     font-size: 0.9rem;
     padding: 0.5rem;
   }
-
   .autocomplete-suggestions {
     max-height: 140px;
   }
-
   button#generate-report,
   button#clear-quantities {
     padding: 0.5rem 1rem;
